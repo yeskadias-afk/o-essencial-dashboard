@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Essencial — Dashboard Abril × Maio 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nu-purple: #820AD1;
+  --nu-purple-dark: #5C0799;
+  --nu-purple-mid: #A020F0;
+  --nu-purple-light: #EDD9FF;
+  --nu-purple-pale: #F7EEFF;
+  --bg: #FFFFFF;
+  --surface: #F5F5FA;
+  --surface2: #EEEEFC;
+  --border: #E0E0F0;
+  --border-soft: #EBEBF7;
+  --text: #1A0533;
+  --text2: #5A4E6B;
+  --text3: #9B90AA;
+  --green: #00A86B;
+  --green-dim: #E6F7F2;
+  --red: #D42B2B;
+  --red-dim: #FDECEC;
+  --amber: #C07000;
+  --amber-dim: #FFF3DC;
+  --blue: #2253A0;
+  --blue-dim: #E8EEFA;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  background: var(--nu-purple);
+  padding: 0 40px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(130,10,209,0.18);
+}
+
+.header-left {
+  padding: 18px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nu-logo {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.nu-logo svg { width: 18px; height: 18px; }
+
+.header-left h1 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+.header-left p {
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  margin-top: 1px;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.tab {
+  padding: 0 22px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+.tab:hover { color: rgba(255,255,255,0.85); }
+.tab.active {
+  color: #fff;
+  border-bottom-color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
+/* CONTENT */
+.tab-content { display: none; padding: 32px 40px 60px; }
+.tab-content.active { display: block; }
+
+/* SECTION LABEL */
+.slabel {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nu-purple);
+  margin-bottom: 12px;
+}
+
+/* METRIC GRID */
+.metric-grid { display: grid; gap: 10px; margin-bottom: 28px; }
+.mc {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.mc .ml { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+.mc .mv { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1; }
+.mc .ms { font-size: 11px; margin-top: 5px; color: var(--text2); font-weight: 600; }
+
+/* BADGES */
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-family: 'Nunito Sans', sans-serif;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-weight: 800;
+}
+.badge.up { background: var(--green-dim); color: var(--green); }
+.badge.down { background: var(--red-dim); color: var(--red); }
+.badge.new { background: var(--nu-purple-light); color: var(--nu-purple); }
+.badge.warn { background: var(--amber-dim); color: var(--amber); }
+.badge.neutral { background: var(--surface2); color: var(--text2); }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+/* CHANNEL TABLE */
+.ct { width: 100%; border-collapse: collapse; font-size: 12px; }
+.ct th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 0 10px 10px 0;
+  border-bottom: 2px solid var(--border);
+}
+.ct th:not(:first-child) { text-align: right; }
+.ct td {
+  padding: 10px 10px 10px 0;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text);
+  vertical-align: middle;
+  font-weight: 500;
+}
+.ct td:not(:first-child) { text-align: right; }
+.ct tr:last-child td { border-bottom: none; }
+.ct tr:hover td { background: var(--nu-purple-pale); }
+.cn { font-weight: 700; font-size: 12px; color: var(--text); }
+.cs { font-size: 10px; color: var(--text3); margin-top: 2px; font-weight: 500; }
+
+/* BARS */
+.bw { display: flex; flex-direction: column; gap: 3px; width: 120px; margin-left: auto; }
+.bt { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.bm { height: 100%; border-radius: 3px; background: var(--nu-purple); }
+.ba { height: 100%; border-radius: 3px; background: var(--nu-purple-light); }
+
+/* INSIGHT CARDS */
+.ig { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+.ic {
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border);
+  padding: 20px;
+  background: var(--bg);
+}
+.ic.good { border-color: #B2E4D4; background: #FAFFF9; }
+.ic.bad { border-color: #F5C0C0; background: #FFFAFA; }
+.ic-title {
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-soft);
+  letter-spacing: 0.01em;
+}
+.ic.good .ic-title { color: var(--green); }
+.ic.bad .ic-title { color: var(--red); }
+.item { margin-bottom: 13px; }
+.item:last-child { margin-bottom: 0; }
+.in { font-size: 12px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 2px; }
+.id { font-size: 11px; color: var(--text2); line-height: 1.6; font-weight: 500; }
+
+/* VERDICT */
+.verdict {
+  background: var(--nu-purple);
+  border-radius: var(--radius-xl);
+  padding: 22px 24px;
+}
+.vt { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+.verdict p { font-size: 12px; color: rgba(255,255,255,0.78); line-height: 1.75; margin-bottom: 8px; font-weight: 500; }
+.verdict p:last-child { margin-bottom: 0; }
+
+/* LEGEND */
+.legend { display: flex; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+.legend span { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text2); font-weight: 600; }
+.ld { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+/* CHART */
+.chart-wrap { position: relative; margin-bottom: 12px; }
+.chart-area { display: flex; align-items: flex-end; gap: 3px; height: 100px; padding-left: 32px; }
+.bar-col { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; }
+.bar-day { border-radius: 3px 3px 0 0; width: 100%; min-width: 3px; transition: opacity 0.15s; }
+.bar-day:hover { opacity: 0.75; }
+.bar-day.apr { background: var(--nu-purple-light); }
+.bar-day.may { background: var(--nu-purple); }
+.bar-day.spike-apr { background: var(--amber); }
+.bar-day.spike-may { background: var(--red); }
+.day-lbl { font-size: 7px; color: var(--text3); writing-mode: vertical-rl; transform: rotate(180deg); height: 22px; overflow: hidden; font-weight: 600; }
+.y-axis { position: absolute; left: 0; top: 0; bottom: 22px; display: flex; flex-direction: column; justify-content: space-between; width: 28px; }
+.y-tick { font-size: 8px; color: var(--text3); text-align: right; font-weight: 700; }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+.col-head { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nu-purple); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--nu-purple-light); }
+
+/* RATE CARDS */
+.rate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 28px; }
+.rate-card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rate-label { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); }
+.rate-val { font-size: 22px; font-weight: 800; color: var(--text); display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.rate-bar-wrap { display: flex; flex-direction: column; gap: 3px; }
+.rate-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.rate-fill-m { height: 100%; border-radius: 3px; background: var(--nu-purple); }
+.rate-fill-a { height: 100%; border-radius: 3px; background: var(--nu-purple-light); }
+.rate-comp { font-size: 10px; color: var(--text3); font-weight: 600; }
+
+/* NOTE */
+.note {
+  font-size: 11px;
+  color: var(--amber);
+  background: var(--amber-dim);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  border-left: 3px solid var(--amber);
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.chart-month-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin: 0 0 6px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="nu-logo">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="#820AD1"/>
+      </svg>
+    </div>
+    <div>
+      <h1>O Essencial — Dashboard</h1>
+      <p>Abril × Maio 2026 &nbsp;·&nbsp; Gerado em 02/06/2026</p>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(0)">01 &nbsp;Subscribers</button>
+    <button class="tab" onclick="switchTab(1)">02 &nbsp;Unsubscribers</button>
+    <button class="tab" onclick="switchTab(2)">03 &nbsp;Conteúdo</button>
+  </div>
+</div>
+
+<!-- ===================== TAB 1: SUBSCRIBERS ===================== -->
+<div class="tab-content active" id="tab0">
+
+  <p class="slabel" style="margin-top:4px">Visão geral</p>
+  <div class="metric-grid" style="grid-template-columns:repeat(4,1fr)">
+    <div class="mc"><p class="ml">Abril</p><p class="mv">1.149</p><p class="ms">24 origens</p></div>
+    <div class="mc"><p class="ml">Maio</p><p class="mv">3.087</p><p class="ms" style="color:var(--green)">+1.938 &nbsp;<span class="badge up">+169%</span></p></div>
+    <div class="mc"><p class="ml">Maio sem masterclass</p><p class="mv">1.166</p><p class="ms">+17 &nbsp;<span class="badge neutral">+1,5%</span></p></div>
+    <div class="mc"><p class="ml">Novas origens</p><p class="mv">+13</p><p class="ms" style="color:var(--red)">−5 perdidas</p></div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="slabel">Por canal e categoria</p>
+  <div class="legend">
+    <span><span class="ld" style="background:var(--nu-purple)"></span>Maio</span>
+    <span><span class="ld" style="background:var(--nu-purple-light)"></span>Abril</span>
+  </div>
+  <table class="ct" style="margin-bottom:32px">
+    <thead><tr><th>Canal / Categoria</th><th>Abril</th><th>Maio</th><th>Var.</th><th style="text-align:right;min-width:130px">Barra</th></tr></thead>
+    <tbody>
+      <tr><td><div class="cn">🔌 API — masterclass</div><div class="cs">api: estrategia-viver-renda-masterclass</div></td><td>1</td><td>1.921</td><td><span class="badge up">+1.920</span></td><td><div class="bw"><div class="bt"><div class="bm" style="width:100%"></div></div><div class="bt"><div class="ba" style="width:0.1%"></div></div></div></td></tr>
+      <tr><td><div class="cn">🔌 API — demais</div><div class="cs">direct · wsjcampaign · agenda-dividendos</div></td><td>383</td><td>338</td><td><span class="badge down">−12%</span></td><td><div class="bw"><div class="bt"><div class="bm" style="width:88%"></div></div><div class="bt"><div class="ba" style="width:100%"></div></div></div></td></tr>
+      <tr><td><div class="cn">💰 Website — tráfego pago (CPC)</div><div class="cs">google-search · meta-ads · google-pmax · discovery-uol</div></td><td>503</td><td>452</td><td><span class="badge down">−10%</span></td><td><div class="bw"><div class="bt"><div class="bm" style="width:90%"></div></div><div class="bt"><div class="ba" style="width:100%"></div></div></div></td></tr>
+      <tr><td><div class="cn">🔍 Website — orgânico e direto</div><div class="cs">direct · google organic · chatgpt</div></td><td>113</td><td>81</td><td><span class="badge down">−28%</span></td><td><div class="bw"><div class="bt"><div class="bm" style="width:72%"></div></div><div class="bt"><div class="ba" style="width:100%"></div></div></div></td></tr>
+      <tr><td><div class="cn">📱 Website — redes sociais</div><div class="cs">instagram · tiktok · youtube · linkedin · facebook</div></td><td>19</td><td>34</td><td><span class="badge up">+79%</span></td><td><div class="bw"><div class="bt"><div class="bm" style="width:100%"></div></div><div class="bt"><div class="ba" style="width:56%"></div></div></div></td></tr>
+      <tr><td><div class="cn">✉️ Website — newsletters e email</div><div class="cs">morning-cripto · o-essencial · the_news · bizness</div></td><td>13</td><td>9</td><td><span class="badge down">−31%</span></td><td><div class="bw"><div class="bt"><div class="bm" style="width:69%"></div></div><div class="bt"><div class="ba" style="width:100%"></div></div></div></td></tr>
+      <tr><td><div class="cn">🔗 Website — referral externo</div><div class="cs">investnews · uol · clickup</div></td><td>1</td><td>6</td><td><span class="badge up">+500%</span></td><td><div class="bw"><div class="bt"><div class="bm" style="width:100%"></div></div><div class="bt"><div class="ba" style="width:17%"></div></div></div></td></tr>
+      <tr><td><div class="cn">🔗 Referral</div><div class="cs">direct · android.gm · office.net · o-essencial · unfoldr</div></td><td>64</td><td>85</td><td><span class="badge up">+33%</span></td><td><div class="bw"><div class="bt"><div class="bm" style="width:100%"></div></div><div class="bt"><div class="ba" style="width:75%"></div></div></div></td></tr>
+      <tr><td><div class="cn">📨 Recommendation</div><div class="cs">morning-cripto (+) · followupdocomex (−) · leiturafinanceira (nova)</div></td><td>49</td><td>33</td><td><span class="badge down">−33%</span></td><td><div class="bw"><div class="bt"><div class="bm" style="width:67%"></div></div><div class="bt"><div class="ba" style="width:100%"></div></div></div></td></tr>
+      <tr><td><div class="cn">📥 Import</div><div class="cs">import: direct: none — canal novo em maio</div></td><td>—</td><td>122</td><td><span class="badge new">nova</span></td><td><div class="bw"><div class="bt"><div class="bm" style="width:100%"></div></div><div class="bt"><div class="ba" style="width:0%"></div></div></div></td></tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <p class="slabel">Destaques</p>
+  <div class="ig">
+    <div class="ic good">
+      <p class="ic-title">✅ O que melhorou</p>
+      <div class="item"><p class="in">API — Masterclass <span class="badge up">+1.920 subs</span></p><p class="id">Maior evento de aquisição do período. Sozinha respondeu por 62% de todos os subs de maio.</p></div>
+      <div class="item"><p class="in">Redes sociais <span class="badge up">+79%</span></p><p class="id">TikTok +600%, Instagram dobrou. YouTube thumb e LinkedIn estrearam como fontes novas.</p></div>
+      <div class="item"><p class="in">Referral direto <span class="badge up">+33%</span></p><p class="id">Crescimento consistente e orgânico, de 61 para 79 subs.</p></div>
+      <div class="item"><p class="in">wsjcampaign (API) <span class="badge up">+1.950%</span></p><p class="id">Escalou de 2 para 41 subs — ativação relevante dentro do canal API.</p></div>
+      <div class="item"><p class="in">Import <span class="badge new">canal novo</span></p><p class="id">122 subs vindos de importação direta — origem a monitorar nos próximos meses.</p></div>
+    </div>
+    <div class="ic bad">
+      <p class="ic-title">⚠️ O que piorou</p>
+      <div class="item"><p class="in">Tráfego pago (CPC) <span class="badge down">−10%</span></p><p class="id">Todos os produtos recuaram: Google Search −10%, Meta −7%, Google PMax −31%.</p></div>
+      <div class="item"><p class="in">Orgânico e direto <span class="badge down">−28%</span></p><p class="id">Tráfego direto ao site caiu −34 subs. Sinal de queda de brand awareness recorrente.</p></div>
+      <div class="item"><p class="in">Recommendation <span class="badge down">−33%</span></p><p class="id">followupdocomex zerou completamente (−26 subs). morning-cripto segurou parcialmente.</p></div>
+      <div class="item"><p class="in">Newsletters como fonte <span class="badge down">−31%</span></p><p class="id">morning-cripto perdeu −80% de efetividade como origem de subs no website.</p></div>
+      <div class="item"><p class="in">5 origens desapareceram</p><p class="id">followupdocomex, agenda-dividendos, facebook, clickup e nubank/slack zeraram em maio.</p></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <p class="slabel">Veredicto</p>
+  <div class="verdict">
+    <p class="vt">Crescimento real, mas concentrado e frágil</p>
+    <p>O salto de +169% em maio é expressivo, mas 62% dos subscribers vieram de uma única fonte — a masterclass. Excluindo ela, a base cresceu apenas +1,5% em relação a abril, com a maioria dos canais estruturais em queda.</p>
+    <p>O sinal mais positivo fora da masterclass é o crescimento de redes sociais, ainda pequeno em volume mas com trajetória clara de alta. O sinal mais preocupante é o recuo simultâneo do tráfego pago, orgânico e de newsletters — os três pilares mais controláveis da aquisição recorrente.</p>
+    <p>A prioridade deve ser entender se a masterclass se repete como canal, e ao mesmo tempo reverter a queda nos canais pagos e de email antes que ela se consolide.</p>
+  </div>
+
+</div>
+
+<!-- ===================== TAB 2: UNSUBSCRIBERS ===================== -->
+<div class="tab-content" id="tab1">
+
+  <p class="slabel" style="margin-top:4px">Visão geral</p>
+  <div class="metric-grid" style="grid-template-columns:repeat(5,1fr)">
+    <div class="mc"><p class="ml">Abril (total)</p><p class="mv">1.258</p><p class="ms">42,3/dia (média)</p></div>
+    <div class="mc"><p class="ml">Maio (total)</p><p class="mv">1.189</p><p class="ms" style="color:var(--green)">−69 &nbsp;<span class="badge up">−5,5%</span></p><p class="ms">38,4/dia (média)</p></div>
+    <div class="mc"><p class="ml">Abril sem pico 02/abr</p><p class="mv">1.007</p><p class="ms">34,7/dia (29 dias)</p></div>
+    <div class="mc"><p class="ml">Maio vs abril normalizado</p><p class="mv">+18%</p><p class="ms" style="color:var(--red)">+182 unsubs &nbsp;<span class="badge down">+3,7/dia</span></p></div>
+    <div class="mc"><p class="ml">Pico de abril</p><p class="mv">251</p><p class="ms">02/abr — outlier</p></div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="slabel">Unsubscribers por dia</p>
+  <div class="legend">
+    <span><span class="ld" style="background:var(--nu-purple-light)"></span>Abril</span>
+    <span><span class="ld" style="background:var(--nu-purple)"></span>Maio</span>
+    <span><span class="ld" style="background:var(--amber)"></span>Pico abril (02/abr: 251)</span>
+    <span><span class="ld" style="background:var(--red)"></span>Pico maio (04/mai: 84)</span>
+  </div>
+
+  <p class="chart-month-label">Unsubscribers por dia — abril vs maio</p>
+  <div class="legend" style="margin-bottom:10px">
+    <span><span class="ld" style="background:#EDD9FF"></span>Abril</span>
+    <span><span class="ld" style="background:#820AD1"></span>Maio</span>
+    <span style="font-size:10px;color:var(--amber)">⚠ pico outlier</span>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:16px 12px 8px;margin-bottom:28px">
+    <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
+  <line x1="44" y1="168.0" x2="744" y2="168.0" stroke="#E0E0F0" stroke-width="1" stroke-dasharray=""/>
+<text x="38" y="172.0" text-anchor="end" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">0</text>
+<line x1="44" y1="139.5" x2="744" y2="139.5" stroke="#E0E0F0" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="38" y="143.5" text-anchor="end" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">50</text>
+<line x1="44" y1="111.1" x2="744" y2="111.1" stroke="#E0E0F0" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="38" y="115.1" text-anchor="end" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">100</text>
+<line x1="44" y1="82.6" x2="744" y2="82.6" stroke="#E0E0F0" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="38" y="86.6" text-anchor="end" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">150</text>
+<line x1="44" y1="54.2" x2="744" y2="54.2" stroke="#E0E0F0" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="38" y="58.2" text-anchor="end" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">200</text>
+<line x1="44" y1="25.1" x2="744" y2="25.1" stroke="#E0E0F0" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="38" y="29.1" text-anchor="end" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">251</text>
+
+  
+<line x1="44" y1="144.1" x2="744.0" y2="144.1" stroke="#EDD9FF" stroke-width="1" stroke-dasharray="6,3"/>
+<text x="748.0" y="148.1" font-size="8" fill="#820AD1" font-family="Nunito Sans,sans-serif" font-weight="700">~41.9</text>
+<line x1="44" y1="146.1" x2="744" y2="146.1" stroke="#185FA5" stroke-width="1" stroke-dasharray="6,3" opacity="0.35"/>
+<text x="748.0" y="150.1" font-size="8" fill="#185FA5" font-family="Nunito Sans,sans-serif" font-weight="700">~38.4</text>
+
+  <!-- Abril line -->
+  <polyline points="44.0,149.8 68.1,25.1 92.3,144.7 116.4,149.2 140.6,153.8 164.7,144.1 188.8,147.5 213.0,146.9 237.1,144.1 261.2,143.0 285.4,148.1 309.5,150.4 333.7,146.4 357.8,152.1 381.9,152.6 406.1,151.5 430.2,142.4 454.3,153.2 478.5,160.0 502.6,148.1 526.8,161.7 550.9,152.1 575.0,141.2 599.2,143.0 623.3,148.1 647.4,144.1 671.6,133.8 695.7,150.9 719.9,152.1 744.0,144.1" fill="none" stroke="#EDD9FF" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Maio line -->
+  <polyline points="44.0,145.8 67.3,149.8 90.7,144.7 114.0,120.2 137.3,149.2 160.7,152.1 184.0,141.8 207.3,147.5 230.7,157.8 254.0,151.5 277.3,148.6 300.7,157.2 324.0,152.6 347.3,139.5 370.7,143.5 394.0,146.9 417.3,145.8 440.7,142.4 464.0,144.1 487.3,151.5 510.7,145.8 534.0,148.1 557.3,153.2 580.7,148.1 604.0,136.7 627.3,139.5 650.7,140.7 674.0,140.1 697.3,150.4 720.7,150.9 744.0,145.2" fill="none" stroke="#820AD1" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="68.1" cy="25.1" r="5" fill="#C07000"/>
+  <text x="68.1" y="16.1" text-anchor="middle" font-size="9" font-weight="800" fill="#C07000" font-family="Nunito Sans,sans-serif">251 ⚠</text>
+  <circle cx="114.0" cy="120.2" r="5" fill="#D42B2B"/>
+  <text x="136.0" y="114.2" text-anchor="middle" font-size="9" font-weight="800" fill="#D42B2B" font-family="Nunito Sans,sans-serif">84 ⚠</text>
+  <text x="44.0" y="194" text-anchor="middle" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">01</text>
+<text x="160.7" y="194" text-anchor="middle" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">06</text>
+<text x="277.3" y="194" text-anchor="middle" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">11</text>
+<text x="394.0" y="194" text-anchor="middle" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">16</text>
+<text x="510.7" y="194" text-anchor="middle" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">21</text>
+<text x="627.3" y="194" text-anchor="middle" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">26</text>
+<text x="744.0" y="194" text-anchor="middle" font-size="9" fill="#9B90AA" font-family="Nunito Sans,sans-serif" font-weight="700">31</text>
+
+</svg>
+  </div>  </div>
+
+  <hr class="divider">
+
+  <p class="slabel">Origem dos unsubscribers</p>
+  <div class="two-col" style="margin-top:16px">
+    <div>
+      <p class="col-head">Abril — top origens</p>
+      <table class="ct">
+        <thead><tr><th style="padding-bottom:10px">Fonte</th><th style="text-align:right;white-space:nowrap">Unsubs</th><th style="text-align:right">%</th></tr></thead>
+        <tbody>
+          <tr><td style="word-break:break-all;padding-right:12px">import: direct / (none)</td><td style="text-align:right;white-space:nowrap">962</td><td style="text-align:right;white-space:nowrap"><span class="badge down">76,5%</span></td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">api: direct / (none)</td><td style="text-align:right;white-space:nowrap">58</td><td style="text-align:right;white-space:nowrap">4,6%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">api: wsjcampaign / site</td><td style="text-align:right;white-space:nowrap">46</td><td style="text-align:right;white-space:nowrap">3,7%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">website: investnews.com.br</td><td style="text-align:right;white-space:nowrap">40</td><td style="text-align:right;white-space:nowrap">3,2%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">website: google-search / cpc</td><td style="text-align:right;white-space:nowrap">38</td><td style="text-align:right;white-space:nowrap">3,0%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">website: meta-ads / cpc</td><td style="text-align:right;white-space:nowrap">35</td><td style="text-align:right;white-space:nowrap">2,8%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">website: instagram.com</td><td style="text-align:right;white-space:nowrap">25</td><td style="text-align:right;white-space:nowrap">2,0%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">website: direct / (none)</td><td style="text-align:right;white-space:nowrap">24</td><td style="text-align:right;white-space:nowrap">1,9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p class="col-head">Maio — top origens</p>
+      <table class="ct">
+        <thead><tr><th style="padding-bottom:10px">Fonte</th><th style="text-align:right;white-space:nowrap">Unsubs</th><th style="text-align:right">%</th></tr></thead>
+        <tbody>
+          <tr><td style="word-break:break-all;padding-right:12px">import: direct / (none)</td><td style="text-align:right;white-space:nowrap">698</td><td style="text-align:right;white-space:nowrap"><span class="badge warn">58,7%</span></td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">api: estrategia-viver-renda-masterclass</td><td style="text-align:right;white-space:nowrap">84</td><td style="text-align:right;white-space:nowrap"><span class="badge down">7,1%</span></td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">website: instagram.com</td><td style="text-align:right;white-space:nowrap">71</td><td style="text-align:right;white-space:nowrap">6,0%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">api: direct / (none)</td><td style="text-align:right;white-space:nowrap">69</td><td style="text-align:right;white-space:nowrap">5,8%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">website: meta-ads / cpc</td><td style="text-align:right;white-space:nowrap">63</td><td style="text-align:right;white-space:nowrap">5,3%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">website: investnews.com.br</td><td style="text-align:right;white-space:nowrap">47</td><td style="text-align:right;white-space:nowrap">4,0%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">website: google-search / cpc</td><td style="text-align:right;white-space:nowrap">39</td><td style="text-align:right;white-space:nowrap">3,3%</td></tr>
+          <tr><td style="word-break:break-all;padding-right:12px">api: wsjcampaign / site</td><td style="text-align:right;white-space:nowrap">36</td><td style="text-align:right;white-space:nowrap">3,0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="slabel">Destaques</p>
+  <div class="ig">
+    <div class="ic good">
+      <p class="ic-title">✅ Sinais positivos</p>
+      <div class="item"><p class="in">Volume total caiu −5,5% <span class="badge up">−69 unsubs</span></p><p class="id">De 1.258 em abril para 1.189 em maio — queda modesta, consistente com o dashboard de conteúdo (unsubscribe rate 0.04% vs 0.05%).</p></div>
+      <div class="item"><p class="in">Pico de maio muito menor <span class="badge up">84 vs 251</span></p><p class="id">O pico de 02/abr foi 3× maior que o de 04/mai. Maio foi muito mais distribuído e estável.</p></div>
+      <div class="item"><p class="in">Import diminuindo como fonte de unsubs</p><p class="id">Em abril 76,5% dos unsubs vieram de import; em maio caiu para 58,7% — a base importada está sendo digerida.</p></div>
+    </div>
+    <div class="ic bad">
+      <p class="ic-title">⚠️ Pontos de atenção</p>
+      <div class="item"><p class="in">Sem o pico, maio foi +18% pior <span class="badge down">+182 unsubs</span></p><p class="id">Abril normalizado teve 34,7/dia. Maio teve 38,4/dia. A melhora aparente some quando o outlier é removido.</p></div>
+      <div class="item"><p class="in">Masterclass: 84 unsubs imediatos <span class="badge down">4,4% dos inscritos</span></p><p class="id">Concentrados em 04/mai — primeiro envio pós-cadastro. Taxa de churn precoce a monitorar.</p></div>
+      <div class="item"><p class="in">Instagram: saldo líquido negativo <span class="badge down">25 → 71 unsubs</span></p><p class="id">Instagram trouxe apenas 14 novos subs e gerou 71 cancelamentos em maio. Canal custando mais do que rende.</p></div>
+      <div class="item"><p class="in">Meta Ads: churn relativo dobrou <span class="badge down">17% → 32%</span></p><p class="id">Em maio, Meta gerou 63 unsubs vs 194 subs novos. Em abril era 35 vs 209. Relação se deteriorou.</p></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <p class="slabel">Veredicto</p>
+  <div class="verdict">
+    <p class="vt">Sem o outlier, maio foi pior — novos canais trazem churn precoce</p>
+    <p>O volume total de unsubscribers caiu em maio e o comportamento foi bem mais estável — sem o pico extremo de 251 que distorceu abril. Mas removendo esse outlier, a cadência diária de maio foi 11% mais alta.</p>
+    <p>Dois padrões novos merecem atenção: a masterclass, que trouxe 1.921 subs e já perdeu 84 no mesmo mês, e o Instagram, com saldo líquido negativo. A segunda quinzena de maio também mostrou tendência de alta gradual, possivelmente correlacionada com a frequência maior de envios.</p>
+  </div>
+
+</div>
+
+<!-- ===================== TAB 3: CONTEÚDO ===================== -->
+<div class="tab-content" id="tab2">
+
+  <p class="slabel" style="margin-top:4px">Performance geral</p>
+  <div class="metric-grid" style="grid-template-columns:repeat(6,1fr)">
+    <div class="mc"><p class="ml">Delivered</p><p class="mv">958k</p><p class="ms" style="color:var(--green)">+135k &nbsp;<span class="badge up">+16%</span></p><p class="ms" style="font-size:10px;color:var(--text3)">abril: 822k</p></div>
+    <div class="mc"><p class="ml">Opened</p><p class="mv">242.7k</p><p class="ms" style="color:var(--green)">+24.9k &nbsp;<span class="badge up">+11%</span></p><p class="ms" style="font-size:10px;color:var(--text3)">abril: 217.8k</p></div>
+    <div class="mc"><p class="ml">Unique Clicks</p><p class="mv">7.709</p><p class="ms" style="color:var(--green)">+2.000 &nbsp;<span class="badge up">+35%</span></p><p class="ms" style="font-size:10px;color:var(--text3)">abril: 5.709</p></div>
+    <div class="mc"><p class="ml">Unsubscribed</p><p class="mv">417</p><p class="ms" style="color:var(--green)">−5 &nbsp;<span class="badge up">−1%</span></p><p class="ms" style="font-size:10px;color:var(--text3)">abril: 422</p></div>
+    <div class="mc"><p class="ml">Posts enviados</p><p class="mv">24</p><p class="ms" style="color:var(--green)">+4 &nbsp;<span class="badge up">+20%</span></p><p class="ms" style="font-size:10px;color:var(--text3)">abril: 20</p></div>
+    <div class="mc"><p class="ml">Unique Subscribers</p><p class="mv">44.292</p><p class="ms" style="color:var(--red)">−91 &nbsp;<span class="badge down">−0,2%</span></p><p class="ms" style="font-size:10px;color:var(--text3)">abril: 44.383</p></div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="slabel">Taxas de engajamento</p>
+  <div class="legend">
+    <span><span class="ld" style="background:var(--nu-purple)"></span>Maio</span>
+    <span><span class="ld" style="background:var(--nu-purple-light)"></span>Abril</span>
+  </div>
+  <div class="rate-grid">
+    <div class="rate-card">
+      <p class="rate-label">Open Rate</p>
+      <p class="rate-val">25,34% <span class="badge down">−1,14pp</span></p>
+      <div class="rate-bar-wrap">
+        <div class="rate-bar"><div class="rate-fill-m" style="width:96%"></div></div>
+        <div class="rate-bar"><div class="rate-fill-a" style="width:100%"></div></div>
+      </div>
+      <p class="rate-comp">abril: 26,48%</p>
+    </div>
+    <div class="rate-card">
+      <p class="rate-label">Click-to-Open Rate</p>
+      <p class="rate-val">3,03% <span class="badge up">+0,41pp</span></p>
+      <div class="rate-bar-wrap">
+        <div class="rate-bar"><div class="rate-fill-m" style="width:100%"></div></div>
+        <div class="rate-bar"><div class="rate-fill-a" style="width:87%"></div></div>
+      </div>
+      <p class="rate-comp">abril: 2,62%</p>
+    </div>
+    <div class="rate-card">
+      <p class="rate-label">Verified CTO Rate</p>
+      <p class="rate-val">3,03% <span class="badge up">+0,52pp</span></p>
+      <div class="rate-bar-wrap">
+        <div class="rate-bar"><div class="rate-fill-m" style="width:100%"></div></div>
+        <div class="rate-bar"><div class="rate-fill-a" style="width:83%"></div></div>
+      </div>
+      <p class="rate-comp">abril: 2,51%</p>
+    </div>
+    <div class="rate-card">
+      <p class="rate-label">Unsubscribe Rate</p>
+      <p class="rate-val">0,04% <span class="badge up">−0,01pp</span></p>
+      <div class="rate-bar-wrap">
+        <div class="rate-bar"><div class="rate-fill-m" style="width:80%"></div></div>
+        <div class="rate-bar"><div class="rate-fill-a" style="width:100%"></div></div>
+      </div>
+      <p class="rate-comp">abril: 0,05%</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="slabel">Posts com melhor desempenho</p>
+  <div class="two-col">
+    <div>
+      <p class="col-head">Abril — top por open rate</p>
+      <table class="ct">
+        <thead><tr><th>Assunto</th><th>Open Rate</th><th>Clicks</th></tr></thead>
+        <tbody>
+          <tr><td>Conselho caro, incentivo zero...</td><td>27,21%</td><td>221</td></tr>
+          <tr><td>1 x 0 para o fim da escala 6x1</td><td>26,73%</td><td>247</td></tr>
+          <tr><td>Como a IA está demitindo programadores</td><td>26,63%</td><td>450</td></tr>
+          <tr><td>Um rastro que liga a Latache ao caso Master</td><td>26,42%</td><td>195</td></tr>
+          <tr><td>Apple: hardware primeiro, IA depois</td><td>25,95%</td><td>198</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p class="col-head">Maio — top por open rate</p>
+      <table class="ct">
+        <thead><tr><th>Assunto</th><th>Open Rate</th><th>Clicks</th></tr></thead>
+        <tbody>
+          <tr><td>Argentina: a nova potência da mineração?</td><td>25,85%</td><td>32</td></tr>
+          <tr><td>A hora e a vez do Galeão?</td><td>25,16%</td><td>26</td></tr>
+          <tr><td>A reta final de Ivan Monteiro na Axia</td><td>24,93%</td><td>28</td></tr>
+          <tr><td>Royal Enfield X VOGE: duelo de motos</td><td>25,01%</td><td>25</td></tr>
+          <tr><td>Shoppings vão ao TikTok fisgar a Gen Z</td><td>24,67%</td><td>49</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <p class="col-head">Abril — top por clicks únicos</p>
+      <table class="ct">
+        <thead><tr><th>Assunto</th><th>Clicks</th></tr></thead>
+        <tbody>
+          <tr><td>Como a IA está demitindo programadores</td><td><strong>450</strong></td></tr>
+          <tr><td>1 x 0 para o fim da escala 6x1</td><td>247</td></tr>
+          <tr><td>O efeito da guerra no IPCA</td><td>236</td></tr>
+          <tr><td>Conselho caro, incentivo zero...</td><td>221</td></tr>
+          <tr><td>Apple: hardware primeiro, IA depois</td><td>198</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p class="col-head">Maio — top por clicks únicos</p>
+      <table class="ct">
+        <thead><tr><th>Assunto</th><th>Clicks</th></tr></thead>
+        <tbody>
+          <tr><td>Shoppings vão ao TikTok fisgar a Gen Z</td><td><strong>49</strong></td></tr>
+          <tr><td>Argentina: a nova potência da mineração?</td><td>32</td></tr>
+          <tr><td>Estamos ao vivo</td><td>31</td></tr>
+          <tr><td>A hora e a vez do Galeão?</td><td>26</td></tr>
+          <tr><td>A segunda chance da Light no Rio</td><td>22</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="slabel">Destaques</p>
+  <div class="ig">
+    <div class="ic good">
+      <p class="ic-title">✅ O que melhorou</p>
+      <div class="item"><p class="in">Unique Clicks <span class="badge up">+35%</span></p><p class="id">De 5.709 para 7.709 — maior crescimento relativo entre todas as métricas. Mais leitores clicando após abrir.</p></div>
+      <div class="item"><p class="in">Click-to-Open Rate <span class="badge up">+0,41pp</span></p><p class="id">De 2,62% para 3,03%. Quem abre está clicando mais — sinal de conteúdo mais relevante ou CTAs mais eficazes.</p></div>
+      <div class="item"><p class="in">Verified CTO Rate <span class="badge up">+0,52pp</span></p><p class="id">De 2,51% para 3,03%, o maior salto proporcional entre as taxas. Engajamento qualificado em alta.</p></div>
+      <div class="item"><p class="in">Volume entregue <span class="badge up">+16%</span></p><p class="id">958k vs 822k — mais emails entregues, reflexo do crescimento da base e de 4 posts adicionais em maio.</p></div>
+      <div class="item"><p class="in">Unsubscribe Rate <span class="badge up">−0,01pp</span></p><p class="id">Caiu de 0,05% para 0,04% — menor taxa de descadastro mesmo com mais envios.</p></div>
+    </div>
+    <div class="ic bad">
+      <p class="ic-title">⚠️ O que piorou</p>
+      <div class="item"><p class="in">Open Rate <span class="badge down">−1,14pp</span></p><p class="id">De 26,48% para 25,34%. Em abril alguns posts passaram de 27%; em maio nenhum chegou a 26%.</p></div>
+      <div class="item"><p class="in">Clicks por post <span class="badge down">colapso</span></p><p class="id">Top post de abril: 450 clicks. Top post de maio: 49. Volume total cresceu por mais posts, não por melhor performance individual.</p></div>
+      <div class="item"><p class="in">Web Views e Web Clicks <span class="badge down">~−90%</span></p><p class="id">Em abril o pico foi 1.192 web views. Em maio foi 110 — queda de ~90%. Conteúdo perdeu tração fora do email.</p></div>
+      <div class="item"><p class="in">Unique Subscribers ativos <span class="badge down">−91</span></p><p class="id">De 44.383 para 44.292. Novos subs ainda não estão se convertendo em leitores ativos.</p></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <p class="slabel">Veredicto</p>
+  <div class="verdict">
+    <p class="vt">Mais volume, menos impacto por post — engajamento qualificado sobe, alcance orgânico desaba</p>
+    <p>Maio entregou mais em volume: mais emails, mais clicks totais, melhor CTO rate e menos descadastros. Mas a comparação post a post revela queda significativa de performance individual — o melhor post de abril gerou 450 clicks únicos; o de maio, 49.</p>
+    <p>O dado mais preocupante é o colapso do Web Performance: abril tinha picos de 1.192 web views. Em maio esse número caiu ~90%, indicando que o conteúdo perdeu tração fora do email — seja por menor viralização, SEO ou tráfego de referência.</p>
+    <p>Vale avaliar se a cadência maior (24 vs 20 posts) está fragmentando a atenção ou se os temas de maio ressoaram menos com a audiência.</p>
+  </div>
+
+</div>
+
+<script>
+function switchTab(i) {
+  document.querySelectorAll('.tab').forEach((t,j) => t.classList.toggle('active', i===j));
+  document.querySelectorAll('.tab-content').forEach((c,j) => c.classList.toggle('active', i===j));
+}
+</script>
+</body>
+</html>
